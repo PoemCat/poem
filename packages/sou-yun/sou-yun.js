@@ -84,19 +84,3 @@ async function write(dataList, { name, dynasty, format }) {
         fs.writeFileSync([['dist', dynasty, name].join('/'), format].join('.'), JSON.stringify(dataList, null, 2));
     }
 }
-
-// (async function () {
-//     const dynastyList = await getDynasty();
-//     const execDynastyList = dynastyList.slice(0, 1);
-//     await Promise.all(execDynastyList.map(async dynasty => {
-//         const authorList = await getAuthorByDaynasty(dynasty.href)
-//         if (!fs.existsSync('./dist/' + dynasty.dynasty)) {
-//             fs.mkdirSync('./dist/' + dynasty.dynasty);
-//         }
-//         const execAuthorList = authorList.slice(1, 2);
-//         await Promise.all(execAuthorList.map(async author => {
-//             const poemList = await getPoemByAuthor(author.href);
-//             write(poemList, { name: author.name, dynasty: dynasty.dynasty })
-//         }))
-//     }))
-// })()
