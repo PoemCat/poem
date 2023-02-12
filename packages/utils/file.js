@@ -4,9 +4,9 @@ import path from "path";
 
 /**
  * 简单JSON格式化方法
- * @param {*} dataList 
- * @param {*} pretty 
- * @returns 
+ * @param {*} dataList
+ * @param {*} pretty
+ * @returns
  */
 const jsonFormatter = (dataList, pretty) => {
   return pretty ? JSON.stringify(dataList, null, 2) : JSON.stringify(dataList);
@@ -14,8 +14,8 @@ const jsonFormatter = (dataList, pretty) => {
 
 /**
  * 一个简单的JSON转CSV
- * @param {*} dataList 
- * @returns 
+ * @param {*} dataList
+ * @returns
  */
 const json2csv = (dataList) => {
   const headerKeys = dataList
@@ -35,7 +35,7 @@ export function writeFile(dataList, options) {
   if (format === "json") {
     fs.writeFileSync(path, jsonFormatter(dataList, pretty));
   } else if (format === "csv") {
-    fs.writeFileSync(path, json2csv(dataList)); 
+    fs.writeFileSync(path, json2csv(dataList));
   }
 }
 
