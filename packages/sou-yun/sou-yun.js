@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import * as cheerio from "cheerio";
-import fs from 'fs';
 
 const domain = 'https://www.sou-yun.cn/';
 
@@ -53,7 +52,6 @@ export async function getPoemByAuthor(authorHref) {
     const pageNumReg = /共(?<poemNum>\d+)，分(?<pageNum>\d+)页显示/
     while (true) {
         const url = domain + authorHref + (i === 0 ? '' : '&type=All&page=' + i);
-        console.log(url);
         const resp = await fetch(url);
         const html = await resp.text();
         const $ = cheerio.load(html);
@@ -78,9 +76,3 @@ export async function getPoemByAuthor(authorHref) {
     }
 }
 
-async function write(dataList, { name, dynasty, format }) {
-    format = format || 'json';
-    if (format === 'json') {
-        fs.writeFileSync([['dist', dynasty, name].join('/'), format].join('.'), JSON.stringify(dataList, null, 2));
-    }
-}

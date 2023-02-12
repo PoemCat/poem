@@ -1,9 +1,22 @@
 import fs from "fs";
+import { fileURLToPath } from "url";
+import path from "path";
 
+/**
+ * 简单JSON格式化方法
+ * @param {*} dataList 
+ * @param {*} pretty 
+ * @returns 
+ */
 const jsonFormatter = (dataList, pretty) => {
   return pretty ? JSON.stringify(dataList, null, 2) : JSON.stringify(dataList);
 };
 
+/**
+ * 一个简单的JSON转CSV
+ * @param {*} dataList 
+ * @returns 
+ */
 const json2csv = (dataList) => {
   const headerKeys = dataList
     .map((dv) => Object.keys(dv))
@@ -24,4 +37,12 @@ export function writeFile(dataList, options) {
   } else if (format === "csv") {
     fs.writeFileSync(path, json2csv(dataList)); 
   }
+}
+
+export function url2Filname(url) {
+  return fileURLToPath(url);
+}
+
+export function url2Dirname(url) {
+  return path.dirname(url2Filname(url));
 }
